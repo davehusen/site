@@ -2,7 +2,7 @@
 title = "Contact"
 +++
 
-* Email: [foo@xyz.com](mailto:foo@xyz.com)
+* Email: [dave@davehusen.com](mailto:dave@davehusen.com)
 
 
 ## Find me on the Internet

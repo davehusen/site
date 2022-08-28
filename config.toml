@@ -13,7 +13,7 @@ googleAnalytics = "G-22C973FM91"  # add your tracking id
   #logo = ""  # url or path to a logo to put in the header
   [params.footer]
     text = "Dave Husen"
-    url = "https://davehuse.com"
+    url = "https://davehusen.com"
   [params.style]  # appearance options (can be omitted)
     fontFamily = "Inconsolata"
     pageWidth = "750px"
