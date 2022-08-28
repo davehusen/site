@@ -1,0 +1,4 @@
+baseURL = 'http://davehusen.com/'
+languageCode = 'en-us'
+title = 'Dave Husen'
+theme='archie'
