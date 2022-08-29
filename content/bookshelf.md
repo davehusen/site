@@ -2,7 +2,7 @@
 title = "bookshelf"
 +++
 
-A non-exhaustive, unordered list of books I've recently read or listened to recently (>2021) and enjoyed enough to add to this list.
+A non-exhaustive, unordered list of books I've recently read or listened to recently (>2020) and enjoyed enough to add to this list.
 
 * [Our Mathematical Universe](https://amzn.to/3CJE9H4)
 * [The Making of the Atomic Bomb](https://amzn.to/3Q3osNY)
