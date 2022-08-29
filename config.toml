@@ -11,9 +11,9 @@ googleAnalytics = "G-22C973FM91"  # add your tracking id
   #description = "A simple monospaced resume theme for Hugo."
   #favicon = "favicon.ico"  # path to a .ico to use as favicon
   #logo = ""  # url or path to a logo to put in the header
-  [params.footer]
-    text = "Dave Husen"
-    url = "https://davehusen.com"
+  #[params.footer]
+  #  text = "Dave Husen"
+  #  url = "https://davehusen.com"
   [params.style]  # appearance options (can be omitted)
     fontFamily = "Inconsolata"
     pageWidth = "750px"
@@ -25,6 +25,14 @@ googleAnalytics = "G-22C973FM91"  # add your tracking id
     title = "Twitter"
     url = "https://twitter.com/davehusen"
   [[params.socialIcons]]
+    icon = "fab fa-github"
+    title = 'Github'
+    url = "https://github.com/davehusen"
+  [[params.socialIcons]]
+    icon = "fab fa-linkedin"
+    title = 'LinkedIn'
+    url = "https://www.linkedin.com/in/davehusen"
+  [[params.socialIcons]]
     icon = "fas fa-envelope"
     title = "E-mail"
     url = "mailto:dave@davehusen.com"
@@ -34,13 +42,13 @@ googleAnalytics = "G-22C973FM91"  # add your tracking id
 
 [menu]
   [[menu.main]]
-    name = "About"
+    name = "about"
     url = "/about"
     weight = 1
   [[menu.main]]
-    name = "Contact"
-    url = "/contact"
-    weight = 3
+    name = "bookshelf"
+    url = "/bookshelf"
+    weight = 2
 
 [markup.goldmark.renderer]
   unsafe = true  # allow raw HTML in markdown files
