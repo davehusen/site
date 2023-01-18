@@ -4,6 +4,8 @@ title = "bookshelf"
 
 A non-exhaustive, unordered list of books I've recently read or listened to (>2020) and enjoyed enough to add to this list.
 
+<br/>
+
 **2022**
 * [Life 3.0: Being Human in the Age of Artificial Intelligence](https://amzn.to/3iL3AQY)
 * [Clean Code: A Handbook of Agile Software Craftsmanship](https://amzn.to/3wdYP5v)
