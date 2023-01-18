@@ -2,7 +2,7 @@
 title = "bookshelf"
 +++
 
-A non-exhaustive, unordered list of books I've recently read or listened to (>2020) and enjoyed enough to add to this list.
+A non-exhaustive, list of books (grouped by year) I've read or listened to and enjoyed enough to add to this list.
 
 <br/>
 
