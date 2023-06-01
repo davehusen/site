@@ -7,6 +7,12 @@ A non-exhaustive, list of books I've read or listened to and enjoyed enough to a
 <br/>
 
 **2023**
+* [The Rise and Fall of the Third Reich](https://a.co/d/7C6EvGF)
+* [Einstein](https://a.co/d/8FRE54A)
+* [Range](https://a.co/d/2AT4ylF)
+* [Life Ascending](https://a.co/d/hdbcna9)
+* [The Kill Chain](https://a.co/d/hdbcna9)
+* [The Hard Thing About Hard Things](https://a.co/d/cTsETmp)
 * [The Vital Question: Energy, Evolution, and the Origins of Complex Life](https://amzn.to/3QRjWUQ)
 * [Life 3.0: Being Human in the Age of Artificial Intelligence](https://amzn.to/3iL3AQY)
 
