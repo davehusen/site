@@ -2,11 +2,11 @@
 title = "bookshelf"
 +++
 
-A non-exhaustive list of books I've read or listened to and enjoyed enough to add to this list.
+A non-exhaustive list of books I've read or listened to (starting in 2020) and enjoyed enough to add to this list.
 
 <br/>
 
-**2023**
+* [Thinking in Systems](https://www.amazon.com/Thinking-Systems-Donella-H-Meadows/dp/1603580557)
 * [The Rise and Fall of the Third Reich](https://a.co/d/7C6EvGF)
 * [Einstein](https://a.co/d/8FRE54A)
 * [Range](https://a.co/d/2AT4ylF)
@@ -15,8 +15,6 @@ A non-exhaustive list of books I've read or listened to and enjoyed enough to ad
 * [The Hard Thing About Hard Things](https://a.co/d/cTsETmp)
 * [The Vital Question: Energy, Evolution, and the Origins of Complex Life](https://amzn.to/3QRjWUQ)
 * [Life 3.0: Being Human in the Age of Artificial Intelligence](https://amzn.to/3iL3AQY)
-
-**2022**
 * [The Pragmatic Programmer](https://amzn.to/3XHl0wC)
 * [Clean Code: A Handbook of Agile Software Craftsmanship](https://amzn.to/3wdYP5v)
 * [The Gene: An Intimate History](https://amzn.to/3kpHGDk)
@@ -35,8 +33,6 @@ A non-exhaustive list of books I've read or listened to and enjoyed enough to ad
 * [Based on a True Story](https://amzn.to/3J95iGu)
 * [My Inventions: The Autobiography of Nikola Tesla](https://amzn.to/3XHAqBb)
 * [Edison](https://amzn.to/3CWuZaz)
-
-**2021**
 * [Rocket Men](https://amzn.to/3ATwZPi)
 * [How the Internet Happened](https://amzn.to/3coPyS9)
 * [Empire of the Summer Moon](https://amzn.to/3AvTIzr)
@@ -53,8 +49,6 @@ A non-exhaustive list of books I've read or listened to and enjoyed enough to ad
 * [The Rise and Fall of Dinosaurs](https://amzn.to/3wDHK5R)
 * [Shoe Dog](https://amzn.to/3QPLx8M)
 * [Expecting Better](https://amzn.to/3CEaLC4)
-
-**2020**
 * [How to Change Your Mind](https://amzn.to/3pSMEYN)
 * [Billion Dollar Whale](https://amzn.to/3wzsMh9)
 * [American Kingpin](https://amzn.to/3AzOcvw)
