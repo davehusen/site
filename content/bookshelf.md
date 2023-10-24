@@ -11,7 +11,7 @@ A non-exhaustive list of books I've read or listened to (since 2020) and enjoyed
 * [Einstein](https://a.co/d/8FRE54A)
 * [Range](https://a.co/d/2AT4ylF)
 * [Life Ascending](https://a.co/d/hdbcna9)
-* [The Kill Chain](https://a.co/d/hdbcna9)
+* [The Kill Chain](https://www.amazon.com/Kill-Chain-Defending-America-High-Tech/dp/B086KQC2H2)
 * [The Hard Thing About Hard Things](https://a.co/d/cTsETmp)
 * [The Vital Question: Energy, Evolution, and the Origins of Complex Life](https://amzn.to/3QRjWUQ)
 * [Life 3.0: Being Human in the Age of Artificial Intelligence](https://amzn.to/3iL3AQY)
