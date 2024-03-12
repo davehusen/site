@@ -5,8 +5,10 @@ title = "bookshelf"
 A non-exhaustive list of books I've read or listened to (since 2020) and enjoyed enough to add to this list.
 
 <br/>
-
-* [Thinking in Systems](https://www.amazon.com/Thinking-Systems-Donella-H-Meadows/dp/1603580557)
+* [Chip War](https://a.co/d/84e9ge7)
+* [Never Let Me Go](https://a.co/d/9945jGl)
+* [The Challenger Sale](https://a.co/d/cSp3J1m)
+* [Thinking in Systems](https://a.co/d/0HsOTXm)
 * [The Rise and Fall of the Third Reich](https://a.co/d/7C6EvGF)
 * [Einstein](https://a.co/d/8FRE54A)
 * [Range](https://a.co/d/2AT4ylF)
