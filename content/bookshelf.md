@@ -5,6 +5,7 @@ title = "bookshelf"
 A non-exhaustive list of books I've read or listened to (since 2020) and enjoyed enough to add to this list.
 
 <br/>
+
 * [Chip War](https://a.co/d/84e9ge7)
 * [Never Let Me Go](https://a.co/d/9945jGl)
 * [The Challenger Sale](https://a.co/d/cSp3J1m)
