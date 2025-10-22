@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="container">
+    {{ .Content }}
+
+    {{ if .GitInfo }}
+    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--color-border); font-size: 0.9em; color: #888;">
+        <em>Last updated: {{ .GitInfo.AuthorDate.Format "January 2, 2006" }}</em>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
