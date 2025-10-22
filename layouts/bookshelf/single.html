@@ -1,11 +1,27 @@
 {{ define "main" }}
 <div class="container">
     {{ .Content }}
-
-    {{ if .GitInfo }}
-    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--color-border); font-size: 0.9em; color: #888;">
-        <em>Last updated: {{ .GitInfo.AuthorDate.Format "January 2, 2006" }}</em>
-    </div>
-    {{ end }}
 </div>
+
+{{ if .GitInfo }}
+<style>
+    #last-updated-placeholder {
+        margin: 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: var(--color-bg-alt);
+        border-left: 4px solid var(--color-red);
+        border-radius: 4px;
+        font-size: 0.95em;
+        color: var(--color-black);
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const placeholder = document.getElementById('last-updated-placeholder');
+        if (placeholder) {
+            placeholder.innerHTML = '<strong>Last updated:</strong> {{ .GitInfo.AuthorDate.Format "January 2, 2006" }}';
+        }
+    });
+</script>
+{{ end }}
 {{ end }}
