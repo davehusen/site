@@ -3,6 +3,7 @@ baseURL = "https://davehusen.com"
 theme = "researcher"
 disableKinds = ["taxonomy", "term"]
 enableEmoji = true
+enableGitInfo = true  # enable automatic git commit date tracking
 math = false          # enable KaTeX (https://katex.org/) globally
 googleAnalytics = "G-22C973FM91"  # add your tracking id
 
