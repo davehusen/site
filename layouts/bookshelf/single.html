@@ -19,12 +19,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         const placeholder = document.getElementById('last-updated-placeholder');
         if (placeholder) {
-            {{ if .GitInfo }}
             placeholder.id = 'last-updated-box';
-            placeholder.innerHTML = '<strong>Last updated:</strong> {{ .GitInfo.AuthorDate.Format "January 2, 2006" }}';
-            {{ else }}
-            placeholder.innerHTML = '<em>GitInfo not available - make sure to run Hugo with git info enabled</em>';
-            {{ end }}
+            placeholder.innerHTML = '<strong>Last updated:</strong> {{ .Lastmod.Format "January 2, 2006" }}';
         }
     });
 </script>
