@@ -1,5 +1,6 @@
 +++
 title = "bookshelf"
+lastmod = 2025-10-22T21:09:30+00:00
 +++
 
 A non-exhaustive list of books I've read or listened to (since 2020) and enjoyed enough to add to this list.
