@@ -1,11 +1,6 @@
 {{ define "main" }}
-<div class="container">
-    {{ .Content }}
-</div>
-
-{{ if .GitInfo }}
 <style>
-    #last-updated-placeholder {
+    #last-updated-box {
         margin: 1.5rem 0;
         padding: 0.75rem 1.25rem;
         background-color: var(--color-bg-alt);
@@ -15,13 +10,22 @@
         color: var(--color-black);
     }
 </style>
+
+<div class="container">
+    {{ .Content }}
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const placeholder = document.getElementById('last-updated-placeholder');
         if (placeholder) {
+            {{ if .GitInfo }}
+            placeholder.id = 'last-updated-box';
             placeholder.innerHTML = '<strong>Last updated:</strong> {{ .GitInfo.AuthorDate.Format "January 2, 2006" }}';
+            {{ else }}
+            placeholder.innerHTML = '<em>GitInfo not available - make sure to run Hugo with git info enabled</em>';
+            {{ end }}
         }
     });
 </script>
-{{ end }}
 {{ end }}
