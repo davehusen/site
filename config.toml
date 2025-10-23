@@ -15,7 +15,8 @@ googleAnalytics = "G-22C973FM91"  # add your tracking id
     text = "© Dave Husen"
     url = "https://davehusen.com"
   [params.style]  # appearance options (can be omitted)
-    fontFamily = "Inconsolata"
+    fontFamily = "'Inter', sans-serif"
+    fontFamilyMono = "'JetBrains Mono', monospace"
     pageWidth = "750px"
     avatarSize = "90px"
     colorBlack = "#222222"
