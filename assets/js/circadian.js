@@ -1,181 +1,135 @@
 /**
  * Circadian Sky System
- * Simulates the sky throughout the day with gradients and adaptive colors
+ * Shifts the page background and text to reflect the sky at the viewer's local time
  */
 
 (function() {
     'use strict';
 
-    // Sky schemes: each period defines a full sky gradient (top → middle → horizon)
-    // plus adaptive UI colors for text, links, and content surfaces
+    // Each period defines a soft atmospheric gradient (top → bottom)
+    // and text/accent colors chosen for contrast and harmony.
+    // Colors are intentionally muted — think real sky washes, not saturated screen colors.
     const skySchemes = {
         night: {
-            // Deep night (0:00 - 5:00) — starless dark sky
-            skyTop:    '#050510',
-            skyMid:    '#0a0e24',
-            skyBottom: '#111a33',
-            text:      '#c8c8d4',
-            accent:    '#7b8fc7',
-            surface:   'rgba(8, 8, 20, 0.65)',
-            border:    'rgba(120, 130, 180, 0.15)'
+            // 0:00–5:00 — deep quiet dark
+            skyTop:    '#0b0d1a',
+            skyBottom: '#141828',
+            text:      '#b8bcc8',
+            accent:    '#8899bb',
+            link:      '#9aa8cc'
         },
         dawn: {
-            // Dawn (5:00 - 8:00) — warm light breaking through
-            skyTop:    '#1a2a5c',
-            skyMid:    '#d68a5e',
-            skyBottom: '#f2c896',
-            text:      '#2c2418',
-            accent:    '#a85d30',
-            surface:   'rgba(255, 245, 230, 0.55)',
-            border:    'rgba(180, 120, 70, 0.15)'
+            // 5:00–8:00 — cool light with warm horizon glow
+            skyTop:    '#3a4466',
+            skyBottom: '#c8a07a',
+            text:      '#3a3028',
+            accent:    '#8a5c3a',
+            link:      '#7a5030'
         },
         morning: {
-            // Morning (8:00 - 12:00) — clear blue sky
-            skyTop:    '#1e6cc4',
-            skyMid:    '#5aa0e0',
-            skyBottom: '#b4d9f2',
-            text:      '#1a2a3a',
-            accent:    '#1a7a5c',
-            surface:   'rgba(255, 255, 255, 0.5)',
-            border:    'rgba(30, 80, 140, 0.1)'
+            // 8:00–12:00 — clear, bright, airy
+            skyTop:    '#6e9ec5',
+            skyBottom: '#d0dfe8',
+            text:      '#1e2d3a',
+            accent:    '#2a6e5a',
+            link:      '#246852'
         },
         afternoon: {
-            // Afternoon (12:00 - 17:00) — bright expansive sky
-            skyTop:    '#1873cc',
-            skyMid:    '#4a9ae0',
-            skyBottom: '#8ec5ed',
-            text:      '#1a2636',
-            accent:    '#c44020',
-            surface:   'rgba(255, 255, 255, 0.45)',
-            border:    'rgba(30, 80, 140, 0.1)'
+            // 12:00–17:00 — open, calm, full light
+            skyTop:    '#5a8eb8',
+            skyBottom: '#c0d4e2',
+            text:      '#1a2a36',
+            accent:    '#a04828',
+            link:      '#8a3e22'
         },
         evening: {
-            // Evening (17:00 - 21:00) — sunset warmth
-            skyTop:    '#1a1440',
-            skyMid:    '#8b3a5c',
-            skyBottom: '#e8844a',
-            text:      '#f0e8e0',
-            accent:    '#e8a060',
-            surface:   'rgba(30, 15, 40, 0.45)',
-            border:    'rgba(220, 160, 100, 0.15)'
+            // 17:00–21:00 — warm, fading light
+            skyTop:    '#2e2244',
+            skyBottom: '#b86e48',
+            text:      '#ede4da',
+            accent:    '#d4a070',
+            link:      '#daa878'
         },
         dusk: {
-            // Dusk (21:00 - 24:00) — twilight descending into night
-            skyTop:    '#08081a',
-            skyMid:    '#12123a',
-            skyBottom: '#1a1848',
-            text:      '#b0b0c8',
-            accent:    '#8080b8',
-            surface:   'rgba(10, 10, 28, 0.6)',
-            border:    'rgba(100, 100, 170, 0.15)'
+            // 21:00–24:00 — settling into darkness
+            skyTop:    '#0e0e20',
+            skyBottom: '#1a1a30',
+            text:      '#a0a4b8',
+            accent:    '#7878a0',
+            link:      '#8888b0'
         }
     };
 
     function hexToRgb(hex) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : { r: 0, g: 0, b: 0 };
+        const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return r ? { r: parseInt(r[1],16), g: parseInt(r[2],16), b: parseInt(r[3],16) } : {r:0,g:0,b:0};
     }
 
     function rgbToHex(r, g, b) {
-        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        return '#' + ((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
     }
 
-    function interpolateHex(color1, color2, factor) {
-        const c1 = hexToRgb(color1);
-        const c2 = hexToRgb(color2);
-        const r = Math.round(c1.r + (c2.r - c1.r) * factor);
-        const g = Math.round(c1.g + (c2.g - c1.g) * factor);
-        const b = Math.round(c1.b + (c2.b - c1.b) * factor);
-        return rgbToHex(r, g, b);
+    function lerp(a, b, t) {
+        const c1 = hexToRgb(a), c2 = hexToRgb(b);
+        return rgbToHex(
+            Math.round(c1.r + (c2.r - c1.r) * t),
+            Math.round(c1.g + (c2.g - c1.g) * t),
+            Math.round(c1.b + (c2.b - c1.b) * t)
+        );
     }
 
-    /**
-     * Parse an rgba() string into components
-     */
-    function parseRgba(str) {
-        const m = str.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+))?\s*\)/);
-        if (m) return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
-        return { r: 0, g: 0, b: 0, a: 0 };
-    }
-
-    function interpolateRgba(rgba1, rgba2, factor) {
-        const c1 = parseRgba(rgba1);
-        const c2 = parseRgba(rgba2);
-        const r = Math.round(c1.r + (c2.r - c1.r) * factor);
-        const g = Math.round(c1.g + (c2.g - c1.g) * factor);
-        const b = Math.round(c1.b + (c2.b - c1.b) * factor);
-        const a = +(c1.a + (c2.a - c1.a) * factor).toFixed(3);
-        return `rgba(${r}, ${g}, ${b}, ${a})`;
-    }
-
-    /**
-     * Get interpolated sky scheme based on current time
-     */
-    function getSkyScheme(hour, minute) {
-        const time = hour + minute / 60;
-
-        const periods = [
-            { end: 5,  scheme: 'night' },
-            { end: 8,  scheme: 'dawn' },
-            { end: 12, scheme: 'morning' },
-            { end: 17, scheme: 'afternoon' },
-            { end: 21, scheme: 'evening' },
-            { end: 24, scheme: 'dusk' }
+    function getSky(hour, minute) {
+        var time = hour + minute / 60;
+        var periods = [
+            { end: 5,  s: 'night' },
+            { end: 8,  s: 'dawn' },
+            { end: 12, s: 'morning' },
+            { end: 17, s: 'afternoon' },
+            { end: 21, s: 'evening' },
+            { end: 24, s: 'dusk' }
         ];
 
-        let currentPeriod = periods[periods.length - 1];
-        let nextPeriod = periods[0];
-        let periodStart = 0;
+        var cur = periods[periods.length - 1];
+        var nxt = periods[0];
+        var start = 0;
 
-        for (let i = 0; i < periods.length; i++) {
+        for (var i = 0; i < periods.length; i++) {
             if (time < periods[i].end) {
-                currentPeriod = i === 0 ? periods[periods.length - 1] : periods[i - 1];
-                nextPeriod = periods[i];
-                periodStart = i === 0 ? 0 : periods[i - 1].end;
+                cur = i === 0 ? periods[periods.length - 1] : periods[i - 1];
+                nxt = periods[i];
+                start = i === 0 ? 0 : periods[i - 1].end;
                 break;
             }
         }
 
-        const periodLength = nextPeriod.end - periodStart;
-        const factor = (time - periodStart) / periodLength;
-
-        const cur = skySchemes[currentPeriod.scheme];
-        const nxt = skySchemes[nextPeriod.scheme];
+        var t = (time - start) / (nxt.end - start);
+        var a = skySchemes[cur.s], b = skySchemes[nxt.s];
 
         return {
-            skyTop:    interpolateHex(cur.skyTop, nxt.skyTop, factor),
-            skyMid:    interpolateHex(cur.skyMid, nxt.skyMid, factor),
-            skyBottom: interpolateHex(cur.skyBottom, nxt.skyBottom, factor),
-            text:      interpolateHex(cur.text, nxt.text, factor),
-            accent:    interpolateHex(cur.accent, nxt.accent, factor),
-            surface:   interpolateRgba(cur.surface, nxt.surface, factor),
-            border:    interpolateRgba(cur.border, nxt.border, factor)
+            skyTop:    lerp(a.skyTop, b.skyTop, t),
+            skyBottom: lerp(a.skyBottom, b.skyBottom, t),
+            text:      lerp(a.text, b.text, t),
+            accent:    lerp(a.accent, b.accent, t),
+            link:      lerp(a.link, b.link, t)
         };
     }
 
-    function applySky() {
-        const now = new Date();
-        const sky = getSkyScheme(now.getHours(), now.getMinutes());
-
-        const root = document.documentElement;
-        root.style.setProperty('--sky-top', sky.skyTop);
-        root.style.setProperty('--sky-mid', sky.skyMid);
-        root.style.setProperty('--sky-bottom', sky.skyBottom);
-        root.style.setProperty('--color-text', sky.text);
-        root.style.setProperty('--color-accent', sky.accent);
-        root.style.setProperty('--color-surface', sky.surface);
-        root.style.setProperty('--color-border', sky.border);
+    function apply() {
+        var now = new Date();
+        var sky = getSky(now.getHours(), now.getMinutes());
+        var s = document.documentElement.style;
+        s.setProperty('--sky-top', sky.skyTop);
+        s.setProperty('--sky-bottom', sky.skyBottom);
+        s.setProperty('--color-text', sky.text);
+        s.setProperty('--color-accent', sky.accent);
+        s.setProperty('--color-link', sky.link);
     }
 
     function init() {
-        applySky();
-        setInterval(applySky, 60000);
+        apply();
+        setInterval(apply, 60000);
         document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) applySky();
+            if (!document.hidden) apply();
         });
     }
 
