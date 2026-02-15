@@ -1,0 +1,21 @@
+<div class="site-header">
+    <div class="container">
+        <nav class="navbar">
+            <a class="navbar-brand" href="{{ .Site.BaseURL }}" title="{{ .Site.Title }}">
+                {{ .Site.Title }}
+            </a>
+            <div class="navbar-nav">
+                {{ with .Site.Menus.main }}
+                    {{ $len := len . }}
+                    {{ range $i, $item := . }}
+                        <a class="nav-link" href="{{ $item.URL }}" title="{{ $item.Name }}">{{ $item.Name }}</a>
+                        {{ if ne (add $i 1) $len }}
+                            <span class="nav-separator">/</span>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        </nav>
+        <hr class="header-rule">
+    </div>
+</div>

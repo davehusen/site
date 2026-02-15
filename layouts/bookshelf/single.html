@@ -1,18 +1,8 @@
 {{ define "main" }}
-<style>
-    #last-updated-box {
-        margin: 1.5rem 0;
-        padding: 0.75rem 1.25rem;
-        background-color: var(--color-bg-alt);
-        border-left: 4px solid var(--color-red);
-        border-radius: 4px;
-        font-size: 0.95em;
-        color: var(--color-black);
-    }
-</style>
-
 <div class="container">
-    {{ .Content }}
+    <div class="content-surface">
+        {{ .Content }}
+    </div>
 </div>
 
 <script>

@@ -1,0 +1,17 @@
+<div id="footer">
+    <div class="container">
+        <hr>
+        {{ if .Site.Params.socialIcons }}
+        <div class="social-icons">
+            {{ range $item := .Site.Params.socialIcons }}
+                <a href="{{ $item.url }}" class="{{ $item.icon }} fa-1x" title="{{ $item.title }}"></a>
+            {{ end }}
+        </div>
+        {{ end }}
+        {{ with .Site.Params.footer }}
+            <div class="copyright">
+                <a href="{{ .url | absURL }}" title="{{ .text }}">{{ .text }}</a>
+            </div>
+        {{ end }}
+    </div>
+</div>
