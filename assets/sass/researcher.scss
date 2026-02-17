@@ -93,21 +93,21 @@ a {
     padding: 0 $space-md;
 }
 
-// Sky stripe — a narrow slit of sky on the left edge, like a window cut into a wall
+// Sky stripe — a vertical window of sky on the left edge, cut into the wall
 .sky-stripe {
     position: fixed;
     top: 0;
     left: 0;
-    width: 6px;
+    width: 40px;
     height: 100%;
     z-index: 10;
     background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
     transition: background $ease;
-    // Inset shadow on all inner edges to sell the recessed "window slit" depth
+    // Inset shadows to sell the recessed window depth
     box-shadow:
-        inset -2px 0 4px rgba(0, 0, 0, 0.35),
-        inset 0  3px 6px rgba(0, 0, 0, 0.25),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+        inset -4px 0  8px rgba(0, 0, 0, 0.3),
+        inset  0  6px 12px rgba(0, 0, 0, 0.2),
+        inset  0 -6px 12px rgba(0, 0, 0, 0.2);
 }
 
 // ─── Header ──────────────────────────────────────────────────────────
