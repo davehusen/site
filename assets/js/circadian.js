@@ -1,69 +1,88 @@
 /**
  * Circadian Sky System
- * Shifts the page background and text to reflect the sky at the viewer's local time
+ * Shifts the sky, wall lighting, and text to reflect the viewer's local time.
+ *
+ * The page background is a concrete wall. A vertical window on the left edge
+ * lets in sky-coloured light that spills across the wall, falling off with
+ * distance. Text uses two fixed tones (warm charcoal / warm cream) that swap
+ * with the day–night cycle for legibility.
  */
 
 (function() {
     'use strict';
 
-    // Each period defines a soft atmospheric gradient (top → bottom),
-    // text/accent colors, and a solid page background that shifts with the sky.
+    // ── colour schemes per period ────────────────────────────────────────
+    //
+    // skyTop / skyBottom : the gradient visible through the window
+    // text / accent / link : page typography (two fixed tones, day & night)
+    // bg                   : base concrete wall colour
+    // lightR/G/B           : colour of the light cast onto the wall
+    // lightA               : peak intensity of the spill (0 – 1)
+
     const skySchemes = {
         night: {
             // 0:00–5:00 — deep quiet dark
             skyTop:    '#0b0d1a',
             skyBottom: '#141828',
-            text:      '#e0e2ea',
-            accent:    '#a8b8d8',
-            link:      '#b0c0e0',
-            bg:        '#1c1c20'
+            text:      '#e2ddd6',
+            accent:    '#c8a878',
+            link:      '#c8a878',
+            bg:        '#1c1c20',
+            lightR: 160, lightG: 170, lightB: 200, lightA: 0.02
         },
         dawn: {
-            // 5:00–8:00 — cool light with warm horizon glow
+            // 5:00–8:00 — warm golden light pouring in
             skyTop:    '#3a4466',
             skyBottom: '#c8a07a',
-            text:      '#1a1208',
-            accent:    '#6a3c1a',
-            link:      '#5a3010',
-            bg:        '#e4ddd4'
+            text:      '#2c2824',
+            accent:    '#7a4428',
+            link:      '#7a4428',
+            bg:        '#e4ddd4',
+            lightR: 220, lightG: 175, lightB: 120, lightA: 0.18
         },
         morning: {
-            // 8:00–12:00 — clear, bright, airy
+            // 8:00–12:00 — bright, clean daylight
             skyTop:    '#6e9ec5',
             skyBottom: '#d0dfe8',
-            text:      '#111e28',
-            accent:    '#1a5a46',
-            link:      '#18503e',
-            bg:        '#e8e6e2'
+            text:      '#2c2824',
+            accent:    '#7a4428',
+            link:      '#7a4428',
+            bg:        '#e8e6e2',
+            lightR: 210, lightG: 220, lightB: 230, lightA: 0.12
         },
         afternoon: {
-            // 12:00–17:00 — open, calm, full light
+            // 12:00–17:00 — full, open daylight
             skyTop:    '#5a8eb8',
             skyBottom: '#c0d4e2',
-            text:      '#0e1c26',
-            accent:    '#8a3818',
-            link:      '#7a3012',
-            bg:        '#eae8e4'
+            text:      '#2c2824',
+            accent:    '#7a4428',
+            link:      '#7a4428',
+            bg:        '#eae8e4',
+            lightR: 220, lightG: 215, lightB: 200, lightA: 0.10
         },
         evening: {
-            // 17:00–21:00 — warm, fading light
+            // 17:00–21:00 — deep amber sunset
             skyTop:    '#2e2244',
             skyBottom: '#b86e48',
-            text:      '#f5ede4',
-            accent:    '#e8b880',
-            link:      '#ecc090',
-            bg:        '#242028'
+            text:      '#e2ddd6',
+            accent:    '#c8a878',
+            link:      '#c8a878',
+            bg:        '#242028',
+            lightR: 210, lightG: 150, lightB: 80, lightA: 0.16
         },
         dusk: {
             // 21:00–24:00 — settling into darkness
             skyTop:    '#0e0e20',
             skyBottom: '#1a1a30',
-            text:      '#d8dae8',
-            accent:    '#9898c0',
-            link:      '#a8a8d0',
-            bg:        '#1a1a1e'
+            text:      '#e2ddd6',
+            accent:    '#c8a878',
+            link:      '#c8a878',
+            bg:        '#1a1a1e',
+            lightR: 140, lightG: 150, lightB: 180, lightA: 0.03
         }
     };
+
+    // ── helpers ──────────────────────────────────────────────────────────
 
     function hexToRgb(hex) {
         const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -82,6 +101,12 @@
             Math.round(c1.b + (c2.b - c1.b) * t)
         );
     }
+
+    function lerpNum(a, b, t) {
+        return a + (b - a) * t;
+    }
+
+    // ── sky computation ─────────────────────────────────────────────────
 
     function getSky(hour, minute) {
         var time = hour + minute / 60;
@@ -116,20 +141,42 @@
             text:      lerp(a.text, b.text, t),
             accent:    lerp(a.accent, b.accent, t),
             link:      lerp(a.link, b.link, t),
-            bg:        lerp(a.bg, b.bg, t)
+            bg:        lerp(a.bg, b.bg, t),
+            lightR:    Math.round(lerpNum(a.lightR, b.lightR, t)),
+            lightG:    Math.round(lerpNum(a.lightG, b.lightG, t)),
+            lightB:    Math.round(lerpNum(a.lightB, b.lightB, t)),
+            lightA:    lerpNum(a.lightA, b.lightA, t)
         };
     }
+
+    // ── light-spill gradient ────────────────────────────────────────────
+    // Simulates light entering from the left-edge window and falling off
+    // across the wall surface. Exponential-style decay via four stops.
+
+    function buildLightGradient(r, g, b, a) {
+        var c = r + ',' + g + ',' + b;
+        return 'linear-gradient(to right,' +
+            'rgba(' + c + ',' + a.toFixed(4) + ') 0%,' +
+            'rgba(' + c + ',' + (a * 0.55).toFixed(4) + ') 8%,' +
+            'rgba(' + c + ',' + (a * 0.20).toFixed(4) + ') 25%,' +
+            'rgba(' + c + ',' + (a * 0.05).toFixed(4) + ') 45%,' +
+            'rgba(' + c + ',0) 65%)';
+    }
+
+    // ── apply ───────────────────────────────────────────────────────────
 
     function apply() {
         var now = new Date();
         var sky = getSky(now.getHours(), now.getMinutes());
         var s = document.documentElement.style;
-        s.setProperty('--sky-top', sky.skyTop);
-        s.setProperty('--sky-bottom', sky.skyBottom);
-        s.setProperty('--color-text', sky.text);
+
+        s.setProperty('--sky-top',      sky.skyTop);
+        s.setProperty('--sky-bottom',   sky.skyBottom);
+        s.setProperty('--color-text',   sky.text);
         s.setProperty('--color-accent', sky.accent);
-        s.setProperty('--color-link', sky.link);
-        s.setProperty('--color-bg', sky.bg);
+        s.setProperty('--color-link',   sky.link);
+        s.setProperty('--color-bg',     sky.bg);
+        s.setProperty('--wall-light',   buildLightGradient(sky.lightR, sky.lightG, sky.lightB, sky.lightA));
     }
 
     function init() {
