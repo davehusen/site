@@ -21,10 +21,10 @@ $ease: 2s ease;
 :root {
     --sky-top: #5a8eb8;
     --sky-bottom: #c0d4e2;
-    --color-text: #1a2a36;
-    --color-accent: #a04828;
-    --color-link: #8a3e22;
-    --color-surface: rgba(210, 225, 235, 0.45);
+    --color-text: #0e1c26;
+    --color-accent: #8a3818;
+    --color-link: #7a3012;
+    --color-bg: #e5edf4;
 }
 
 *, *::before, *::after {
@@ -37,10 +37,8 @@ html {
     height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    // Sky gradient lives on html, fixed to viewport — never changes with content height
-    background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
-    background-attachment: fixed;
-    transition: background $ease;
+    background: var(--color-bg);
+    transition: background-color $ease;
 }
 
 body {
@@ -75,7 +73,7 @@ a {
 
 ::selection {
     background: var(--color-accent);
-    color: var(--sky-bottom);
+    color: var(--color-bg);
 }
 
 // ─── Layout ──────────────────────────────────────────────────────────
@@ -87,17 +85,29 @@ a {
     padding: 0 $space-md;
 }
 
-// Reading surface — gives text a consistent backdrop for legibility
+// Content wrapper
 .content-surface {
-    background: var(--color-surface);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 8px;
     max-width: calc(#{$max-width} + #{$space-md} * 2);
-    width: calc(100% - #{$space-md} * 2);
-    margin: $space-lg auto;
+    width: 100%;
+    margin: 0 auto;
     padding: 0 $space-md;
-    transition: background-color $ease;
+}
+
+// Sky stripe — a narrow slit of sky on the left edge, like a window cut into a wall
+.sky-stripe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    z-index: 10;
+    background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+    transition: background $ease;
+    // Inset shadow on all inner edges to sell the recessed "window slit" depth
+    box-shadow:
+        inset -2px 0 4px rgba(0, 0, 0, 0.35),
+        inset 0  3px 6px rgba(0, 0, 0, 0.25),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.25);
 }
 
 // ─── Header ──────────────────────────────────────────────────────────
@@ -327,10 +337,5 @@ a {
 @media (max-width: 600px) {
     body { font-size: 15px; }
     .navbar { flex-direction: column; gap: 0.25rem; }
-    .content-surface {
-        width: calc(100% - #{$space-xs} * 2);
-        margin: $space-sm auto;
-        border-radius: 6px;
-    }
     #content { padding: $space-sm 0 $space-md; }
 }

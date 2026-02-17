@@ -7,63 +7,61 @@
     'use strict';
 
     // Each period defines a soft atmospheric gradient (top → bottom),
-    // text/accent colors, and a surface color for content readability.
-    // The surface is a subtle translucent panel so text always sits on
-    // a background it contrasts against, regardless of gradient position.
+    // text/accent colors, and a solid page background that shifts with the sky.
     const skySchemes = {
         night: {
             // 0:00–5:00 — deep quiet dark
             skyTop:    '#0b0d1a',
             skyBottom: '#141828',
-            text:      '#b8bcc8',
-            accent:    '#8899bb',
-            link:      '#9aa8cc',
-            surface:   'rgba(10, 12, 28, 0.55)'
+            text:      '#e0e2ea',
+            accent:    '#a8b8d8',
+            link:      '#b0c0e0',
+            bg:        '#111320'
         },
         dawn: {
             // 5:00–8:00 — cool light with warm horizon glow
             skyTop:    '#3a4466',
             skyBottom: '#c8a07a',
-            text:      '#2a2018',
-            accent:    '#8a5c3a',
-            link:      '#6a4020',
-            surface:   'rgba(210, 180, 140, 0.4)'
+            text:      '#1a1208',
+            accent:    '#6a3c1a',
+            link:      '#5a3010',
+            bg:        '#ede4d6'
         },
         morning: {
             // 8:00–12:00 — clear, bright, airy
             skyTop:    '#6e9ec5',
             skyBottom: '#d0dfe8',
-            text:      '#1e2d3a',
-            accent:    '#2a6e5a',
-            link:      '#246852',
-            surface:   'rgba(220, 232, 240, 0.45)'
+            text:      '#111e28',
+            accent:    '#1a5a46',
+            link:      '#18503e',
+            bg:        '#e8f0f6'
         },
         afternoon: {
             // 12:00–17:00 — open, calm, full light
             skyTop:    '#5a8eb8',
             skyBottom: '#c0d4e2',
-            text:      '#1a2a36',
-            accent:    '#a04828',
-            link:      '#8a3e22',
-            surface:   'rgba(210, 225, 235, 0.45)'
+            text:      '#0e1c26',
+            accent:    '#8a3818',
+            link:      '#7a3012',
+            bg:        '#e5edf4'
         },
         evening: {
             // 17:00–21:00 — warm, fading light
             skyTop:    '#2e2244',
             skyBottom: '#b86e48',
-            text:      '#ede4da',
-            accent:    '#d4a070',
-            link:      '#daa878',
-            surface:   'rgba(40, 28, 55, 0.5)'
+            text:      '#f5ede4',
+            accent:    '#e8b880',
+            link:      '#ecc090',
+            bg:        '#1c1430'
         },
         dusk: {
             // 21:00–24:00 — settling into darkness
             skyTop:    '#0e0e20',
             skyBottom: '#1a1a30',
-            text:      '#a0a4b8',
-            accent:    '#7878a0',
-            link:      '#8888b0',
-            surface:   'rgba(14, 14, 32, 0.5)'
+            text:      '#d8dae8',
+            accent:    '#9898c0',
+            link:      '#a8a8d0',
+            bg:        '#12121e'
         }
     };
 
@@ -83,20 +81,6 @@
             Math.round(c1.g + (c2.g - c1.g) * t),
             Math.round(c1.b + (c2.b - c1.b) * t)
         );
-    }
-
-    function parseRgba(s) {
-        var m = s.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+))?\s*\)/);
-        return m ? { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 } : { r:0,g:0,b:0,a:0 };
-    }
-
-    function lerpRgba(a, b, t) {
-        var c1 = parseRgba(a), c2 = parseRgba(b);
-        return 'rgba(' +
-            Math.round(c1.r + (c2.r - c1.r) * t) + ', ' +
-            Math.round(c1.g + (c2.g - c1.g) * t) + ', ' +
-            Math.round(c1.b + (c2.b - c1.b) * t) + ', ' +
-            (c1.a + (c2.a - c1.a) * t).toFixed(3) + ')';
     }
 
     function getSky(hour, minute) {
@@ -132,7 +116,7 @@
             text:      lerp(a.text, b.text, t),
             accent:    lerp(a.accent, b.accent, t),
             link:      lerp(a.link, b.link, t),
-            surface:   lerpRgba(a.surface, b.surface, t)
+            bg:        lerp(a.bg, b.bg, t)
         };
     }
 
@@ -145,7 +129,7 @@
         s.setProperty('--color-text', sky.text);
         s.setProperty('--color-accent', sky.accent);
         s.setProperty('--color-link', sky.link);
-        s.setProperty('--color-surface', sky.surface);
+        s.setProperty('--color-bg', sky.bg);
     }
 
     function init() {
