@@ -24,7 +24,7 @@ $ease: 2s ease;
     --color-text: #0e1c26;
     --color-accent: #8a3818;
     --color-link: #7a3012;
-    --color-bg: #e5edf4;
+    --color-bg: #eae8e4;
 }
 
 *, *::before, *::after {
@@ -51,6 +51,8 @@ body {
     line-height: 1.7;
     color: var(--color-text);
     transition: color $ease;
+    // Push content to the right of the sky stripe
+    padding-left: 18px;
 }
 
 // ─── Typography ──────────────────────────────────────────────────────
@@ -98,16 +100,20 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    width: 40px;
+    width: 18px;
     height: 100%;
     z-index: 10;
     background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
     transition: background $ease;
-    // Inset shadows to sell the recessed window depth
+    // Hard edge where the wall meets the opening
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow:
-        inset -4px 0  8px rgba(0, 0, 0, 0.3),
-        inset  0  6px 12px rgba(0, 0, 0, 0.2),
-        inset  0 -6px 12px rgba(0, 0, 0, 0.2);
+        // Inner wall faces — heavier on the right (the visible wall depth)
+        inset -5px 0 7px rgba(0, 0, 0, 0.4),
+        inset  0   5px 10px rgba(0, 0, 0, 0.2),
+        inset  0  -5px 10px rgba(0, 0, 0, 0.2),
+        // Outer shadow cast onto the page surface beside the opening
+        2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 // ─── Header ──────────────────────────────────────────────────────────
@@ -116,7 +122,6 @@ a {
     padding: $space-sm 0 0;
     .container {
         padding-bottom: $space-sm;
-        border-bottom: 1px solid currentColor;
         opacity: 0.85;
     }
 }
@@ -292,7 +297,6 @@ a {
 
     .container {
         padding-top: $space-sm;
-        border-top: 1px solid currentColor;
         opacity: 0.85;
     }
 

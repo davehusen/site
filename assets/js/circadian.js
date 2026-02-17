@@ -16,7 +16,7 @@
             text:      '#e0e2ea',
             accent:    '#a8b8d8',
             link:      '#b0c0e0',
-            bg:        '#111320'
+            bg:        '#1c1c20'
         },
         dawn: {
             // 5:00–8:00 — cool light with warm horizon glow
@@ -25,7 +25,7 @@
             text:      '#1a1208',
             accent:    '#6a3c1a',
             link:      '#5a3010',
-            bg:        '#ede4d6'
+            bg:        '#e4ddd4'
         },
         morning: {
             // 8:00–12:00 — clear, bright, airy
@@ -34,7 +34,7 @@
             text:      '#111e28',
             accent:    '#1a5a46',
             link:      '#18503e',
-            bg:        '#e8f0f6'
+            bg:        '#e8e6e2'
         },
         afternoon: {
             // 12:00–17:00 — open, calm, full light
@@ -43,7 +43,7 @@
             text:      '#0e1c26',
             accent:    '#8a3818',
             link:      '#7a3012',
-            bg:        '#e5edf4'
+            bg:        '#eae8e4'
         },
         evening: {
             // 17:00–21:00 — warm, fading light
@@ -52,7 +52,7 @@
             text:      '#f5ede4',
             accent:    '#e8b880',
             link:      '#ecc090',
-            bg:        '#1c1430'
+            bg:        '#242028'
         },
         dusk: {
             // 21:00–24:00 — settling into darkness
@@ -61,7 +61,7 @@
             text:      '#d8dae8',
             accent:    '#9898c0',
             link:      '#a8a8d0',
-            bg:        '#12121e'
+            bg:        '#1a1a1e'
         }
     };
 
