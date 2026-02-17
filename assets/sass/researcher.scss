@@ -97,25 +97,29 @@ a {
     padding: 0 $space-md;
 }
 
-// Sky stripe — a vertical window of sky on the left edge, cut into the wall
+// Sky window — a tall rectangle of sky cut into the concrete wall
 .sky-stripe {
     position: fixed;
-    top: 0;
+    top: 8%;
+    bottom: 8%;
     left: 0;
     width: 18px;
-    height: 100%;
     z-index: 10;
     background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
     transition: background $ease;
-    // Hard edge where the wall meets the opening
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    // Hard edges where concrete meets the opening
+    border-right:  1px solid rgba(0, 0, 0, 0.20);
+    border-top:    1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     box-shadow:
-        // Inner wall faces — heavier on the right (the visible wall depth)
-        inset -5px 0 7px rgba(0, 0, 0, 0.4),
-        inset  0   5px 10px rgba(0, 0, 0, 0.2),
-        inset  0  -5px 10px rgba(0, 0, 0, 0.2),
-        // Outer shadow cast onto the page surface beside the opening
-        2px 0 8px rgba(0, 0, 0, 0.1);
+        // Inner wall faces — the depth of the window opening
+        inset -5px  0   7px rgba(0, 0, 0, 0.40),   // right reveal
+        inset  0    5px 7px rgba(0, 0, 0, 0.30),   // lintel (top, deeper shadow)
+        inset  0   -5px 7px rgba(0, 0, 0, 0.15),   // sill (bottom, catches light)
+        // Outer shadow cast onto the wall around the opening
+         2px  0   10px rgba(0, 0, 0, 0.12),
+         0   -3px  8px rgba(0, 0, 0, 0.08),
+         0    3px  8px rgba(0, 0, 0, 0.08);
 }
 
 // ─── Header ──────────────────────────────────────────────────────────
