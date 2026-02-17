@@ -15,55 +15,55 @@
             // 0:00–5:00 — deep quiet dark
             skyTop:    '#0b0d1a',
             skyBottom: '#141828',
-            text:      '#b8bcc8',
-            accent:    '#8899bb',
-            link:      '#9aa8cc',
-            surface:   'rgba(10, 12, 28, 0.55)'
+            text:      '#e0e2ea',
+            accent:    '#a8b8d8',
+            link:      '#b0c0e0',
+            surface:   'rgba(10, 12, 28, 0.75)'
         },
         dawn: {
             // 5:00–8:00 — cool light with warm horizon glow
             skyTop:    '#3a4466',
             skyBottom: '#c8a07a',
-            text:      '#2a2018',
-            accent:    '#8a5c3a',
-            link:      '#6a4020',
-            surface:   'rgba(210, 180, 140, 0.4)'
+            text:      '#1a1208',
+            accent:    '#6a3c1a',
+            link:      '#5a3010',
+            surface:   'rgba(220, 195, 160, 0.7)'
         },
         morning: {
             // 8:00–12:00 — clear, bright, airy
             skyTop:    '#6e9ec5',
             skyBottom: '#d0dfe8',
-            text:      '#1e2d3a',
-            accent:    '#2a6e5a',
-            link:      '#246852',
-            surface:   'rgba(220, 232, 240, 0.45)'
+            text:      '#111e28',
+            accent:    '#1a5a46',
+            link:      '#18503e',
+            surface:   'rgba(230, 240, 248, 0.7)'
         },
         afternoon: {
             // 12:00–17:00 — open, calm, full light
             skyTop:    '#5a8eb8',
             skyBottom: '#c0d4e2',
-            text:      '#1a2a36',
-            accent:    '#a04828',
-            link:      '#8a3e22',
-            surface:   'rgba(210, 225, 235, 0.45)'
+            text:      '#0e1c26',
+            accent:    '#8a3818',
+            link:      '#7a3012',
+            surface:   'rgba(225, 238, 248, 0.7)'
         },
         evening: {
             // 17:00–21:00 — warm, fading light
             skyTop:    '#2e2244',
             skyBottom: '#b86e48',
-            text:      '#ede4da',
-            accent:    '#d4a070',
-            link:      '#daa878',
-            surface:   'rgba(40, 28, 55, 0.5)'
+            text:      '#f5ede4',
+            accent:    '#e8b880',
+            link:      '#ecc090',
+            surface:   'rgba(35, 22, 50, 0.72)'
         },
         dusk: {
             // 21:00–24:00 — settling into darkness
             skyTop:    '#0e0e20',
             skyBottom: '#1a1a30',
-            text:      '#a0a4b8',
-            accent:    '#7878a0',
-            link:      '#8888b0',
-            surface:   'rgba(14, 14, 32, 0.5)'
+            text:      '#d8dae8',
+            accent:    '#9898c0',
+            link:      '#a8a8d0',
+            surface:   'rgba(14, 14, 32, 0.75)'
         }
     };
 
