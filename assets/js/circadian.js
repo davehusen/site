@@ -18,7 +18,7 @@
             text:      '#e0e2ea',
             accent:    '#a8b8d8',
             link:      '#b0c0e0',
-            surface:   'rgba(10, 12, 28, 0.75)'
+            surface:   'rgba(10, 12, 28, 0.35)'
         },
         dawn: {
             // 5:00–8:00 — cool light with warm horizon glow
@@ -27,7 +27,7 @@
             text:      '#1a1208',
             accent:    '#6a3c1a',
             link:      '#5a3010',
-            surface:   'rgba(220, 195, 160, 0.7)'
+            surface:   'rgba(220, 195, 160, 0.3)'
         },
         morning: {
             // 8:00–12:00 — clear, bright, airy
@@ -36,7 +36,7 @@
             text:      '#111e28',
             accent:    '#1a5a46',
             link:      '#18503e',
-            surface:   'rgba(230, 240, 248, 0.7)'
+            surface:   'rgba(230, 240, 248, 0.3)'
         },
         afternoon: {
             // 12:00–17:00 — open, calm, full light
@@ -45,7 +45,7 @@
             text:      '#0e1c26',
             accent:    '#8a3818',
             link:      '#7a3012',
-            surface:   'rgba(225, 238, 248, 0.7)'
+            surface:   'rgba(225, 238, 248, 0.3)'
         },
         evening: {
             // 17:00–21:00 — warm, fading light
@@ -54,7 +54,7 @@
             text:      '#f5ede4',
             accent:    '#e8b880',
             link:      '#ecc090',
-            surface:   'rgba(35, 22, 50, 0.72)'
+            surface:   'rgba(35, 22, 50, 0.35)'
         },
         dusk: {
             // 21:00–24:00 — settling into darkness
@@ -63,7 +63,7 @@
             text:      '#d8dae8',
             accent:    '#9898c0',
             link:      '#a8a8d0',
-            surface:   'rgba(14, 14, 32, 0.75)'
+            surface:   'rgba(14, 14, 32, 0.35)'
         }
     };
 
