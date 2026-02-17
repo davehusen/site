@@ -103,11 +103,15 @@ a {
     z-index: 10;
     background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
     transition: background $ease;
-    // Inset shadows to sell the recessed window depth
+    // Hard edge where the wall meets the opening
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow:
-        inset -4px 0  8px rgba(0, 0, 0, 0.3),
-        inset  0  6px 12px rgba(0, 0, 0, 0.2),
-        inset  0 -6px 12px rgba(0, 0, 0, 0.2);
+        // Inner wall faces — heavier on the right (the visible wall depth)
+        inset -8px 0 10px rgba(0, 0, 0, 0.45),
+        inset  0   8px 14px rgba(0, 0, 0, 0.25),
+        inset  0  -8px 14px rgba(0, 0, 0, 0.25),
+        // Outer shadow cast onto the page surface beside the opening
+        3px 0 10px rgba(0, 0, 0, 0.12);
 }
 
 // ─── Header ──────────────────────────────────────────────────────────
