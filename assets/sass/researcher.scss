@@ -38,7 +38,6 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: var(--color-bg);
-    transition: background-color $ease;
 }
 
 body {
@@ -49,14 +48,12 @@ body {
     font-size: $font-size;
     line-height: 1.7;
     color: var(--color-text);
-    transition: color $ease;
 }
 
 // ─── Typography ──────────────────────────────────────────────────────
 
 * {
     color: inherit;
-    transition: color $ease, background-color $ease, border-color $ease;
 }
 
 a {
@@ -121,11 +118,11 @@ a {
     letter-spacing: -0.03em;
     &::before {
         content: '';
-        width: 9px;
-        height: 18px;
-        border-radius: 9px 0 0 9px;
+        width: 0.7em;
+        height: 0.7em;
+        border-radius: 50%;
         background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
-        transition: background $ease;
+        transition: background 2s ease;
     }
     &:hover {
         opacity: 0.7;
