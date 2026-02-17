@@ -24,6 +24,7 @@ $ease: 2s ease;
     --color-text: #1a2a36;
     --color-accent: #a04828;
     --color-link: #8a3e22;
+    --color-surface: rgba(210, 225, 235, 0.45);
 }
 
 *, *::before, *::after {
@@ -36,19 +37,22 @@ html {
     height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    // Sky gradient lives on html, fixed to viewport — never changes with content height
+    background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+    background-attachment: fixed;
+    transition: background $ease;
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
-    background-attachment: fixed;
+    background: transparent;
     font-family: $font-family;
     font-size: $font-size;
     line-height: 1.7;
     color: var(--color-text);
-    transition: color $ease, background $ease;
+    transition: color $ease;
 }
 
 // ─── Typography ──────────────────────────────────────────────────────
@@ -83,12 +87,25 @@ a {
     padding: 0 $space-md;
 }
 
+// Reading surface — gives text a consistent backdrop for legibility
+.content-surface {
+    background: var(--color-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 8px;
+    max-width: calc(#{$max-width} + #{$space-md} * 2);
+    width: calc(100% - #{$space-md} * 2);
+    margin: $space-lg auto;
+    padding: 0 $space-md;
+    transition: background-color $ease;
+}
+
 // ─── Header ──────────────────────────────────────────────────────────
 
 .site-header {
-    padding: $space-lg 0 0;
+    padding: $space-sm 0 0;
     .container {
-        padding-bottom: $space-md;
+        padding-bottom: $space-sm;
         border-bottom: 1px solid currentColor;
         opacity: 0.85;
     }
@@ -140,7 +157,7 @@ a {
 
 #content {
     flex: 1;
-    padding: $space-lg 0 $space-lg * 2;
+    padding: $space-md 0 $space-md;
 
     p {
         margin-bottom: $space-sm;
@@ -260,11 +277,11 @@ a {
 // ─── Footer ──────────────────────────────────────────────────────────
 
 #footer {
-    padding: 0 0 $space-lg;
+    padding: 0 0 $space-sm;
     text-align: center;
 
     .container {
-        padding-top: $space-md;
+        padding-top: $space-sm;
         border-top: 1px solid currentColor;
         opacity: 0.85;
     }
@@ -310,5 +327,10 @@ a {
 @media (max-width: 600px) {
     body { font-size: 15px; }
     .navbar { flex-direction: column; gap: 0.25rem; }
-    #content { padding: $space-md 0 $space-lg; }
+    .content-surface {
+        width: calc(100% - #{$space-xs} * 2);
+        margin: $space-sm auto;
+        border-radius: 6px;
+    }
+    #content { padding: $space-sm 0 $space-md; }
 }
