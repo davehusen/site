@@ -24,7 +24,7 @@ $ease: 2s ease;
     --color-text: #0e1c26;
     --color-accent: #8a3818;
     --color-link: #7a3012;
-    --color-bg: #e5edf4;
+    --color-bg: #eae8e4;
 }
 
 *, *::before, *::after {
@@ -122,7 +122,6 @@ a {
     padding: $space-sm 0 0;
     .container {
         padding-bottom: $space-sm;
-        border-bottom: 1px solid currentColor;
         opacity: 0.85;
     }
 }
@@ -298,7 +297,6 @@ a {
 
     .container {
         padding-top: $space-sm;
-        border-top: 1px solid currentColor;
         opacity: 0.85;
     }
 
