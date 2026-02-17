@@ -25,7 +25,6 @@ $ease: 2s ease;
     --color-accent: #7a4428;
     --color-link: #7a4428;
     --color-bg: #eae8e4;
-    --wall-light: none;
 }
 
 *, *::before, *::after {
@@ -46,15 +45,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    // Light-spill gradient layers on top of html's solid concrete background
-    background: var(--wall-light, none);
     font-family: $font-family;
     font-size: $font-size;
     line-height: 1.7;
     color: var(--color-text);
     transition: color $ease;
-    // Push content to the right of the sky stripe
-    padding-left: 18px;
 }
 
 // ─── Typography ──────────────────────────────────────────────────────
@@ -97,31 +92,6 @@ a {
     padding: 0 $space-md;
 }
 
-// Sky window — a tall rectangle of sky cut into the concrete wall
-.sky-stripe {
-    position: fixed;
-    top: 8%;
-    bottom: 8%;
-    left: 0;
-    width: 18px;
-    z-index: 10;
-    background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
-    transition: background $ease;
-    // Hard edges where concrete meets the opening
-    border-right:  1px solid rgba(0, 0, 0, 0.20);
-    border-top:    1px solid rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow:
-        // Inner wall faces — the depth of the window opening
-        inset -5px  0   7px rgba(0, 0, 0, 0.40),   // right reveal
-        inset  0    5px 7px rgba(0, 0, 0, 0.30),   // lintel (top, deeper shadow)
-        inset  0   -5px 7px rgba(0, 0, 0, 0.15),   // sill (bottom, catches light)
-        // Outer shadow cast onto the wall around the opening
-         2px  0   10px rgba(0, 0, 0, 0.12),
-         0   -3px  8px rgba(0, 0, 0, 0.08),
-         0    3px  8px rgba(0, 0, 0, 0.08);
-}
-
 // ─── Header ──────────────────────────────────────────────────────────
 
 .site-header {
@@ -141,11 +111,22 @@ a {
 }
 
 .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
     letter-spacing: -0.03em;
+    &::before {
+        content: '';
+        width: 9px;
+        height: 18px;
+        border-radius: 9px 0 0 9px;
+        background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+        transition: background $ease;
+    }
     &:hover {
         opacity: 0.7;
     }
