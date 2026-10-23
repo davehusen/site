@@ -17,4 +17,4 @@ Otto is a personal AI assistant used exclusively by the Husen family for managin
 
 ## Contact
 
-For questions: husendg@gmail.com
+For questions: otto@davehusen.com
